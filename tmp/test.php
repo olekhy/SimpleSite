@@ -1,0 +1,40 @@
+<?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * Created by PhpStorm.
+ * User: al
+ * Date: Nov 28, 2010
+ * Time: 9:15:48 PM
+ *
+ * Short description for file
+ *
+ * Long description for file (if any)...
+ *
+ * PHP versions 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to license@php.net so we can mail you a copy immediately.
+ *
+ * @category   CategoryName
+ * @package    PackageName
+ * @author     Original Author ${AUTHOR} <${AUTHOREMAIL}>
+ * @author     Another Author <another@example.com>
+ * @copyright  1997-2010 The PHP Group
+ * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @version    SVN: $Id:$
+ * @link       http://pear.php.net/package/PackageName
+ * @see        NetOther, Net_Sample::Net_Sample()
+ * @since      File available since Release 1.0.0
+ * @deprecated File deprecated in Release 10.0.0
+ */
+
+// Place includes, constant defines and $_GLOBAL settings here.
+
+return time();
+
+
