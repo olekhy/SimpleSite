@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="2d9a8e06-7173-42f5-a052-5d979f837452" name="Default" comment="" />
+    <list default="true" readonly="true" id="2d9a8e06-7173-42f5-a052-5d979f837452" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---internal-metadatas---Zend_Translate_Gettext_Options" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---test" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---congfig_home_al_P_SimpleSite_application____cachedevelopment" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---internal-metadatas---Zend_Translate_877d2615a9085a1b6f85cf16778c8cce_Gettext" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---Zend_Translate_64b86ce75c80357d1e932ab53cf7b102_Gettext" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---internal-metadatas---congfig_home_al_P_SimpleSite_application____cachedevelopment" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---test1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---internal-metadatas---test" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---Zend_Translate_877d2615a9085a1b6f85cf16778c8cce_Gettext" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---Zend_Translate_Gettext_Options" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---internal-metadatas---Zend_Translate_64b86ce75c80357d1e932ab53cf7b102_Gettext" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cache/zend_cache---internal-metadatas---test1" afterPath="" />
+    </list>
     <ignored path="SimpleSite.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -73,7 +86,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="Scope" currentSubView="All" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -86,7 +99,7 @@
     </navigator>
     <panes>
       <pane id="Scope">
-        <subPane subId="All">
+        <subPane>
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
               <option name="myItemId" value="" />
@@ -96,7 +109,14 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SimpleSite">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
           </PATH>
+        </subPane>
+        <subPane subId="Problems" />
+        <subPane subId="All">
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
               <option name="myItemId" value="" />
@@ -125,24 +145,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="cache">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SimpleSite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SimpleSite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="application">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -320,14 +322,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="0" width="1924" height="1178" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CSS-X-Fire" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25712776" sideWeight="0.41935483" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16948257" sideWeight="0.5740038" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16948257" sideWeight="0.5740038" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="eSnippet Pro" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32418162" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
