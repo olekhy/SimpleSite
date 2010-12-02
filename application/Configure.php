@@ -45,7 +45,8 @@ class Configure
     protected static $_masterConfigFiles = array
     (
         'application.ini',
-        'database.ini',
+        'resources.db.ini',
+        'dbmanager.ini',
         'resources.log.ini',
         'resources.session.ini',
         'resources.frontcontroller.ini',
@@ -54,7 +55,7 @@ class Configure
         'resources.cachemanager.memcached.ini',
         'resources.router.ini',
         'resources.translate.ini',
-        'domains_locale_mapping.ini',
+        'domains.locale.mapping.ini',
         //'someconfigfile.ini',
     );
 

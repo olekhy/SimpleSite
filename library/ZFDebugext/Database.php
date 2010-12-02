@@ -57,8 +57,8 @@
  * @property
  * @method
  */
-require_once 'ZFDebug_'
-class ZFDebugext_Database 
+require_once 'ZFDebug/Controller/Plugin/Debug/Plugin/Database.php';
+class ZFDebugext_Database extends ZFDebug_Controller_Plugin_Debug_Plugin_Database
 {
 
 }

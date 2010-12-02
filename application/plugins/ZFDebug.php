@@ -9,9 +9,9 @@ class App_Plugin_ZFDebug extends ZFDebug_Controller_Plugin_Debug
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
         $frontCtrl = Zend_Controller_Front::getInstance();
-        
+
         $bs = $frontCtrl->getParam('bootstrap');
-        
+
         if($bs && $bs->hasPluginResource('CacheManager')){
             $cacheManager = $bs->getResource('CacheManager');
             $cacheCore = $cacheManager->getCache('core');
@@ -32,9 +32,14 @@ class App_Plugin_ZFDebug extends ZFDebug_Controller_Plugin_Debug
         $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Text());
         $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Memory());
         $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Time());
-        $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Database());
-        //var_dump($options);
-        //$this->setOptions($options);
+
+        if($dbmanager = $bs->getResource('dbmanager')){
+            $dbOptions['adapter']['masterdb'] = $dbmanager->masterdb;
+            $dbOptions['adapter']['slavedb'] = $dbmanager->slavedb;
+            $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Database($dbOptions));
+        }elseif($bs->hasResource('db')){
+            $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Database());    
+        }
     }
 }
 

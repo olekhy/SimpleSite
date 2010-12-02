@@ -18,19 +18,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         /** @var $cacheManager Zend_Cache_Manager */
         if(!$cacheManager->hasCache('core')){
-            $log->info('Core Cache is not available, we using Cache Black hole instead.');
             $cacheManager->setCache('core', $cacheManager->getCache('blackhole'));
-        } $log->debug('Cache core: '.(int)CACHING);
+        }
 
         if(!$cacheManager->hasCache('onfile')){
-            $log->info('Onfile Cache is not available, we using Cache Black hole instead.');
             $cacheManager->setCache('onfile', $cacheManager->getCache('blackhole'));
-        } $log->debug('Cache onfile: '.(int)CACHING);
-        
+        }
+
         if(!$cacheManager->hasCache('memcached')){
-            $log->info('Memcached Cache is not available, we using Cache Black hole instead.');
             $cacheManager->setCache('memcached', $cacheManager->getCache('blackhole'));
-        } $log->debug('Cache memcached: '.(int)CACHING);
+        }
         $cacheCore = $cacheManager->getCache('core');
         //Zend_Locale::setCache($cacheManager->getCache('core'));
         // calling Zend_Date::setOptions(array('cache'=>$cache)) set also cache in the Zend_Locale object 
@@ -62,7 +59,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 $router->removeRoute($router->getCurrentRouteName());
             }
         }
-
+        
         if($this->hasPluginResource('Locale')){
             $this->bootstrap('Locale');
         }
@@ -71,15 +68,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             /** @var $locale Zend_Locale */
             if(!$localeString){
                 $localeString = array_shift(array_flip($locale->getDefault()));
-            }
+            } else $router->setParam('localeInUrl', true);
             $locale->setLocale($localeString); // also in Registry even
         }
 
         return $router;
     }
-
     /**
-     * 
+     *
+     *
      * @return void
      */
     protected function _initSession()
@@ -110,8 +107,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Zend_Session::rememberMe($options['remember_me_seconds']);
         }
     }
-
     /**
+     *
      * 
      * @return Zend_Log
      */
@@ -124,14 +121,65 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             return Configure::log();    
         }
     }
-
+    /**
+     *
+     * 
+     * @return Zend_Translate
+     */
     protected function _initTranslate()
     {
         if($this->hasPluginResource('translate')){
             $this->bootstrap('CacheManager');
+            if($this->hasOption('domain')){          
+                $this->bootstrap('FrontController');
+                $router = $this->getResource('FrontController')->getRouter();
+                if(!$router->getParam('localeInUrl')){ 
+                    $this->bootstrap('Locale');
+                    foreach($this->getOption('domain') as $localeStr => $domain){
+                        if(array_shift($domain) == $_SERVER['SERVER_NAME'] &&
+                           Zend_Locale::isLocale($localeStr)){
+                            $this->getResource('Locale')->setLocale($localeStr);
+                            break;
+                        }
+                    }
+                }
+            }
             return $this->getPluginResource('translate')->init();
         }
     }
-    
+    /**
+     *
+     * 
+     * @return stdClass
+     */
+    protected function _initdbManager()
+    {
+        $dbs = new stdClass();
+        $dbs->masterdb = null;
+        $dbs->slavedb = null;
+        if($options = $this->getOption('dbmanager')){
+            if(array_key_exists('defaultMetadataCache', $options)){
+                $this->bootstrap('CacheManager');
+                $cacheManager = $this->getResource('CacheManager');
+                if($cacheManager instanceof Zend_Cache_Manager){
+                    if($cacheManager->hasCache($options['defaultMetadataCache'])){
+                        $cache = $cacheManager->getCache($options['defaultMetadataCache']);
+                        Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
+                    }
+                }
+            }
+            if(!Zend_Registry::isRegistered('masterdb') && array_key_exists('rw', $options)){
+                $masterOpt = $options['rw'][array_rand($options['rw'], 1)];
+                $dbs->masterdb = Zend_Db::factory($masterOpt['adapter'], $masterOpt);
+                Zend_Registry::set('masterdb', $dbs->masterdb);
+            }
+            if(!Zend_Registry::isRegistered('slavedb') && array_key_exists('r', $options)){
+                $slaveOpt = $options['r'][array_rand($options['r'], 1)];
+                $dbs->slavedb = Zend_Db::factory($slaveOpt['adapter'], $slaveOpt);
+                Zend_Registry::set('slavedb', $dbs->slavedb);
+            }
+        }
+        return $dbs;
+    }
 }
 
