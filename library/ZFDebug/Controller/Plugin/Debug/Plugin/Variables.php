@@ -31,12 +31,13 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Variables extends ZFDebug_Controlle
      */
     protected $_request;
 
+    protected $_provided;
     /**
      * Create ZFDebug_Controller_Plugin_Debug_Plugin_Variables
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($options = array())
     {
 
     }
@@ -84,6 +85,8 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Variables extends ZFDebug_Controlle
                . '<div id="ZFDebug_requests">' . $this->_cleanData($this->_request->getParams()) . '</div>'
                . '<h4>View vars</h4>'
                . '<div id="ZFDebug_vars">' . $this->_cleanData($viewVars) . '</div>';
+
+        
         return $vars;
     }
 

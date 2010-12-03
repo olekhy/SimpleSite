@@ -65,6 +65,7 @@ class IndexController extends Zend_Controller_Action
         //var_dump($translate->getCache());
         //var_dump($translate->getAdapter()->getLocale());
         //var_dump(get_class_methods($translate->getAdapter()));
+        $this->view->hallo = "HALLO";
     }
 
     public function localeAction()

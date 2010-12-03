@@ -25,6 +25,13 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
   </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-list connection-id="49fc81a1-47a0-4d59-bee6-f1c3c240ef15" dataset="lego_okt2010.____reserved_code" active-filter-id="122612e6-3c41-40ba-a9a6-167d996dae78">
+      <filter id="122612e6-3c41-40ba-a9a6-167d996dae78" name="%" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="uuid" operator="=" value="%" active="true" />
+      </filter>
+    </filter-list>
+  </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <group-history-entries value="true" />
     <method-browser />

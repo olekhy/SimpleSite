@@ -96,12 +96,16 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Cache implements ZFDebug_Controller
         }
 
         foreach ($this->_cacheBackends as $name => $backend) {
-            $fillingPercentage = $backend->getFillingPercentage();
+            //$fillingPercentage = $backend->getFillingPercentage();
+            $class = get_class($backend);
             $ids = $backend->getIds();
-            
+            $count = count($ids);
+            if($backend instanceof Zend_Cache_Backend_Memcached){
+                $count = 'Getting the list of cache ids is unsupported by the Memcache backend. ? ';
+            }
             # Print full class name, backends might be custom
-            $panel .= '<h4>Cache '.$name.' ('.get_class($backend).')</h4>';
-            $panel .= count($ids).' Entr'.(count($ids)>1?'ies':'y').'<br />'
+            $panel .= '<h4>Cache '.$name.' ('.$class.')</h4>';
+            $panel .= $count.' Entr'.($count>1?'ies':'y').'<br />'
                     . 'Filling Percentage: '.$backend->getFillingPercentage().'%<br />';
             
             $cacheSize = 0;

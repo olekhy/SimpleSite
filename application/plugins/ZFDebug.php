@@ -14,13 +14,23 @@ class App_Plugin_ZFDebug extends ZFDebug_Controller_Plugin_Debug
 
         if($bs && $bs->hasPluginResource('CacheManager')){
             $cacheManager = $bs->getResource('CacheManager');
-            $cacheCore = $cacheManager->getCache('core');
-            //$cacheFile = $cacheManager->getCache('file');
 
-            $optionsCore = array('backend' => $cacheCore->getBackend());
-            //$optionsFile = array('backend' => $cacheFile->getBackend());
-            $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Cache($optionsCore));
-            //$this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Cache($optionsFile));
+            $options = array();
+            if($cacheManager->hasCache('core')){
+                $options['backend']['core'] = $cacheManager->getCache('core')->getBackend();
+            }
+            if($cacheManager->hasCache('onfile')){
+                $options['backend']['onfile'] = $cacheManager->getCache('onfile')->getBackend();
+            }
+            if($cacheManager->hasCache('memcached')){
+                $options['backend']['memcached'] = $cacheManager->getCache('memcached')->getBackend();
+            }
+            //if($cacheManager->hasCache('file')){
+                //$options['backend']['file'] = $cacheManager->getCache('file')->getBackend();
+            //}
+            if(!empty($options)){     
+                $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Cache($options));
+            }
         }
         $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Variables());
         $this->registerPlugin(new ZFDebug_Controller_Plugin_Debug_Plugin_Auth());

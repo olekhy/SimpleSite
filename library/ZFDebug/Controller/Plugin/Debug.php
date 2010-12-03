@@ -287,10 +287,10 @@ class ZFDebug_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
                  '<p>©2008-2009 <a href="http://jokke.dk">Joakim Nygård</a> & <a href="http://www.bangal.de">Andreas Pankratz</a></p>' .
                  '<p>The project is hosted at <a href="http://code.google.com/p/zfdebug/">http://zfdebug.googlecode.com</a> and released under the BSD License<br />' .
                  'Includes images from the <a href="http://www.famfamfam.com/lab/icons/silk/">Silk Icon set</a> by Mark James</p>';
-        // $panel .= '<h4>Zend Framework '.Zend_Version::VERSION.' / PHP '.phpversion().' with extensions:</h4>';
-        // $extensions = get_loaded_extensions();
-        // natcasesort($extensions);
-        // $panel .= implode('<br>', $extensions);
+         $panel .= '<h4>Zend Framework '.Zend_Version::VERSION.' / PHP '.phpversion().' with extensions:</h4>';
+         $extensions = get_loaded_extensions();
+         natcasesort($extensions);
+         $panel .= implode('<br>', $extensions);
         return $panel;
     }
 
@@ -398,16 +398,16 @@ class ZFDebug_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
 
         return ('
             <style type="text/css" media="screen">
-                #ZFDebug_debug { font: 11px/1.4em Lucida Grande, Lucida Sans Unicode, sans-serif; position:fixed; bottom:5px; left:5px; color:#000; z-index: ' . $this->_options['z-index'] . ';}
+                #ZFDebug_debug { font: 11px/1.4em "Envy Code R", Terminus, Consolas, Lucida Grande, Lucida Sans Unicode, sans-serif; position:fixed; bottom:5px; left:5px; color:#000; z-index: ' . $this->_options['z-index'] . ';}
                 #ZFDebug_debug ol {margin:10px 0px; padding:0 25px}
                 #ZFDebug_debug li {margin:0 0 10px 0;}
                 #ZFDebug_debug .clickable {cursor:pointer}
                 #ZFDebug_toggler { font-weight:bold; background:#BFBFBF; }
                 .ZFDebug_span { border: 1px solid #999; border-right:0px; background:#DFDFDF; padding: 5px 5px; }
                 .ZFDebug_last { border: 1px solid #999; }
-                .ZFDebug_panel { text-align:left; position:absolute;bottom:21px;width:600px; max-height:400px; overflow:auto; display:none; background:#E8E8E8; padding:5px; border: 1px solid #999; }
-                .ZFDebug_panel .pre {font: 11px/1.4em Monaco, Lucida Console, monospace; margin:0 0 0 22px}
-                #ZFDebug_exception { border:1px solid #CD0A0A;display: block; }
+                .ZFDebug_panel { text-align:left; position:absolute;bottom:21px; width:100%; max-height:678px; overflow:auto; display:none; background:#F8F8F8; padding:5px; border: 1px solid #999; }
+                .ZFDebug_panel .pre {font: 11px/1.4em Consolas, Monaco, Lucida Console, monospace; margin:0 0 0 22px}
+                #ZFDebug_exception { width:99%; border:1px solid #CD0A0A;display: none; }
             </style>
             <script type="text/javascript" charset="utf-8">
                 if (typeof jQuery == "undefined") {
