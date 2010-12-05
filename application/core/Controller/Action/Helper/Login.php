@@ -69,10 +69,10 @@
    login.formclass = "App_Form_Login"
    login.adapter.class = "Zend_Auth_Adapter_DbTable"
    login.adapter.tableName = "user"
-   login.adapter.identityColumn = "user_id"
-   login.adapter.usernameColumn = "user_name"
+   login.adapter.identIdentColumn = "user_id"
+   login.adapter.identityColumn = "user_name"
    login.adapter.credentialColumn = "user_password"
-   login.adapter.credentialTreatment = "MD5(?)"
+   login.adapter.credentialTreatment = "MD5(?) AND user_status = 'active'"
    login.adapter.roleColumn = "user_role"
 
 
@@ -114,7 +114,7 @@ class Zend_Controller_Action_Helper_Login  extends Zend_Controller_Action_Helper
      * @var Zend_Auth
      */
     protected $_auth;
-    /**
+    /**                                         zzzzzzzzzz
      * @var Zend_Config
      */
     protected $_cfg;
