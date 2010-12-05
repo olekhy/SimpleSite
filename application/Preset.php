@@ -7,7 +7,7 @@
  * @version $Id$
  * To change this template use File | Settings | File Templates.
  */
-class Configure
+class Preset
 {
     /**
      * @var string
@@ -45,6 +45,7 @@ class Configure
     protected static $_masterConfigFiles = array
     (
         'application.ini',
+        'login.ini',
         'resources.db.ini',
         'dbmanager.ini',
         'resources.log.ini',
@@ -97,7 +98,7 @@ class Configure
             {
                 throw new RuntimeException('Can not initiate Config object');
             }
-            
+            self::thruPluginLoader();
             return $config;
         }
         catch(Exception $e)
@@ -238,7 +239,7 @@ class Configure
      * @return Zend_Config
      */
     private static function _config()
-    {        echo "hallo";
+    {       
         $config = new Zend_Config(array(), true);
         $masterFiles = self::getConfigMasterFiles();
         if(empty($masterFiles))
@@ -289,5 +290,18 @@ class Configure
         }
         return $mf;
     }
+
+    static public function thruPluginLoader()
+    {
+      $classFileIncCache = self::$_cacheDir.DIRECTORY_SEPARATOR.'pluginLoaderCache.php';
+      if (file_exists($classFileIncCache)) {
+          include_once $classFileIncCache;
+      }
+      $config = self::thruConfig();
+      if ($config->pluginLoaderCache) {
+          Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
+      }
+    }
+
 }
 

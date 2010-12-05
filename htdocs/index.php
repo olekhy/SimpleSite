@@ -22,12 +22,12 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
-require_once APPLICATION_PATH.'/Configure.php';
+require_once APPLICATION_PATH.'/Preset.php';
 
 // Create application, bootstrap, and run
 $application = new Zend_Application(
     APPLICATION_ENV,
-    Configure::get(APPLICATION_ENV, LOG_DIR, CACHE_DIR)
+    Preset::get(APPLICATION_ENV, LOG_DIR, CACHE_DIR)
 );
 $application->bootstrap()
     ->run();
