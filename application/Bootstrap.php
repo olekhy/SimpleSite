@@ -4,7 +4,14 @@
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
-
+    /**
+     * @return void
+     */
+    protected function _initCoreLoader()
+    {
+        $loader = $this->getResourceLoader();
+        $loader->addResourceType('Core','core','Core');
+    }
     /**
      * Initiate cache manager resource
      * 

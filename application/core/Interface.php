@@ -49,8 +49,7 @@
  */
 interface App_Core_Interface
 {
-    public function gtLog();
+    public function getLog();
     public function isDebug();
-    public function getCacheManager();
-    public function getConfig();
+
 }

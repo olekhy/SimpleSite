@@ -57,27 +57,6 @@
 abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
 {
     /**
-     * Application config holder
-     * @var Zend_Config
-     */
-    protected static $_cfg;
-    /**
-     * Application config holder
-     * @var Zend_Config
-     */
-    protected $_applicationConfig;
-    /**
-     * Caching object holder
-     * @var Zend_Cache
-     */
-    protected $_cacheManager;
-    /**
-     * Application logger
-     * @var Zend_Log
-     */
-    protected static $_log;
-
-    /**
      * We known magic quotes enabled problem
      * @var boolean
      */
@@ -100,15 +79,21 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
     {
         $element->addFilter(new App_Abstract_Filter_Stripslashes($this->_applyFilterMagicGpc));
     }
-
+    /**
+     * @return string
+     */
     public function getLanguage()
     {
-        return Zend_Registry::get(APPLICATION_REGISTRY_LOCALE)->getLanguage();
+        if(Zend_Registry::isRegistered('Zend_Locale'))
+        return Zend_Registry::get('Zend_Locale')->getLanguage();
     }
-
+    /**
+     * @return string
+     */
     public function getTeritory()
     {
-        return Zend_Registry::get(APPLICATION_REGISTRY_LOCALE)->getTeritory();
+        if(Zend_Registry::isRegistered('Zend_Locale'))
+        return Zend_Registry::get('Zend_Locale')->getTeritory();
     }
     /**
      * Initialize form (used by extending classes)
@@ -117,12 +102,10 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
      */
     public function init()
     {
-    	parent::init();
-    	if(function_exists('get_magic_quotes_gpc') && 1 == get_magic_quotes_gpc())
-        {
+        parent::init();
+        if(function_exists('get_magic_quotes_gpc') && 1 == get_magic_quotes_gpc()) {
             $this->_applyFilterMagicGpc = true;
         }
-
     }
 
     /**
@@ -130,62 +113,16 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
      */
     public function getApplicationConfig ()
     {
-        if(self::$_cfg === null)
-        {
-            if(!defined('APPLICATION_REGISTRY_CONFIG'))
-            {
-                throw new RuntimeException('Constant APPLICATION_REGISTRY_CONFIG must be defined with value "Zend_Config"');
-            }
-
-        }
-        try
-        {
-            if( ! (self::$_cfg = Zend_Registry::get(APPLICATION_REGISTRY_CONFIG)))
-            {
-                throw new UnexpectedValueException('Config object was not registered in Zend_Registry or is empty');
-            }
-        }
-        catch(Exception $e)
-        {
-            error_log($e->getMessage());
-            echo $e->getMessage();
-        }
-        return self::$_cfg;
+        
     }
 
-    /**
-     * @return Zend_Cache_Manager
-     */
-    public function getCacheManager ()
-    {
-        if(! self::$_cacheManager instanceof Zend_Log)
-        {
-            if(!defined('APPLICATION_REGISTRY_CACHE_MANAGER'))
-            {
-                throw new RuntimeException('Constant APPLICATION_REGISTRY_CACHE_MANAGER must be defined with value "Zend_Cache_Manager"');
-            }
-            try
-            {
-                if( ! (self::$_cacheManager = Zend_Registry::get(APPLICATION_REGISTRY_CACHE_MANAGER)) instanceof Zend_Cache_Manager)
-                {
-                    throw new UnexpectedValueException('Zend_Cache_Manager was not registered in Zend_Registry.');
-                }
-            }
-            catch(Exception $e)
-            {
-                error_log($e->getMessage());
-                echo $e->getMessage();
-            }
-        }
-        return self::$_cacheManager;
-    }
+
     /**
      * @return bool true if application run in Debug mode
      */
-    public function isDebug ()
+    public function isDebug()
     {
-        if(DEBUG)
-        {
+        if(DEBUG) {
             return true;
         }
         else return false;
@@ -195,46 +132,11 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
      */
     public function getLog()
     {          
-        if(! self::$_log instanceof Zend_Log)
-        {
-            if(!defined('APPLICATION_REGISTRY_LOG'))
-            {
-                throw new RuntimeException('Constant APPLICATION_REGISTRY_LOG must be defined with value "Zend_Log"');
-            }
-            try
-            {
-                if( ! (self::$_log = Zend_Registry::get(APPLICATION_REGISTRY_LOG)) instanceof Zend_log)
-                {
-                    throw new UnexpectedValueException('Zend_Log was not registered in Zend_Registry.');
-                }
-            }
-            catch(Exception $e)
-            {
-                error_log($e->getMessage());
-                echo $e->getMessage();
-            }
-        }
-        return self::$_log;
+        if(Zend_Registry::isRegistered('Zend_Log'))
+        return Zend_Registry::get('Zend_Log');    
     }
 
-    /**
-     * @param  $methodName : string
-     * @param  $arguments : array
-     * @return mixed|string
-     */
-    /*
-    public function __call($methodName, $arguments)
-    {
-        if(preg_match('/prefix(.+)/i', $methodName, $matches) &&
-           method_exists('App_Abstract_Abstract',$matches[1])
-        )
-        {
-            return call_user_func_array('App_Abstract_Abstract::'.$matches[1], $arguments);
-        }
-        else  return parent::__call($methodName, $arguments);
-    }
-    *
-    */
+
 
     /**
      * Add a new element
@@ -309,7 +211,8 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
      */
     public static function _($string)
     {
-    	return self::getDefaultTranslator()->translate($string);
+        if(self::getDefaultTranslator())
+        return self::getDefaultTranslator()->translate($string);
     }
 
 	/**
@@ -320,25 +223,22 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
      */
     public function setSubFormDecorators($subFormName)
     {
-		try
-		{
-			if(!($sf = $this->getSubForm($subFormName)) instanceof Zend_Form)
-			{
-				$sf = $this;
-				throw new RuntimeException('Call not existing subform in '. __METHOD__. ':'.__LINE__);
-			}
-		}
-		catch(RuntimeException $e)
-		{
-			$this->getLog()->notice($e);
-		}
-		$sf->setDecorators(array(
-	            'FormElements',
-	            array('HtmlTag', array('tag' => 'dl',
-	                                   'class' => 'zend_form11')),
-	            'Form',
-	        ));
-		$sf->removeDecorator('Form');
+        try {
+            if(!($sf = $this->getSubForm($subFormName)) instanceof Zend_Form) {
+                $sf = $this;
+                throw new RuntimeException('Call not existing subform in '. __METHOD__. ':'.__LINE__);
+            }
+        }
+        catch(RuntimeException $e) {
+            $this->getLog()->notice($e);
+        }
+        $sf->setDecorators(array(
+                'FormElements',
+                array('HtmlTag', array('tag' => 'dl',
+                                       'class' => 'zend_form11')),
+                'Form',
+            ));
+        $sf->removeDecorator('Form');
 
         return $this;
     }
@@ -350,8 +250,7 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
      */
     public function getErrorListDeep($translate=true)
     {   $error=$this->getErrorList();
-        foreach ($this as $subForm)
-        {
+        foreach ($this as $subForm) {
             if($subForm instanceof Zend_Form_SubForm)
             $error+=$this->getErrorList($subForm, $translate);
         }
@@ -366,19 +265,15 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
     public function getErrorList($form=null, $translate=true)
     {
         $errors = array();
-        if($form === null)
-        {
+        if($form === null) {
             $form = $this;
         }
-        foreach ($form->getElements() as $elementName => $element)
-        {
+        foreach ($form->getElements() as $elementName => $element) {
             /** @var $element Zend_Form_Element_Xhtml */
-            if($element->hasErrors())
-            {
+            if($element->hasErrors()) {
                 $ary =($translate)?$element->getMessages():$element->getErrors();
                 $errors[$elementName] = array_shift($ary);
-                if(is_array($errors[$elementName]))
-                {
+                if(is_array($errors[$elementName])) {
                     $errors[$elementName] = array_shift($errors[$elementName]);
                 }
 
@@ -386,8 +281,6 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
                     ->setAttrib ('class',' error '.$element->getAttrib('class'))
                     ->removeDecorator('Errors')
                 ;
-
-
             }
         }
         return $errors;
