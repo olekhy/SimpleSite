@@ -27,7 +27,7 @@ class App_Plugin_ProfilerFirePHP extends Zend_Controller_Plugin_Abstract
             Zend_Db_Table_Abstract::getDefaultAdapter()->setProfiler($profiler);
         }
         //$rs = $dbmanager->slavedb->query('SELECT uuid() as SLAVE');
-        $rs = $dbmanager->masterdb->query('SELECT uuid() as MASTER');
+        //$rs = $dbmanager->masterdb->query('SELECT uuid() as MASTER');
     }
 }
 
