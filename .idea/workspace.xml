@@ -8,8 +8,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" />
     </list>
     <list default="true" id="7ee615c2-b51f-4dcf-89ad-e320f6a3a345" name="po1" comment="Fix and addon ZFDebug libray classes">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/Controller/Action/Helper/Login.php" afterPath="$PROJECT_DIR$/application/core/Controller/Action/Helper/Login.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/application/configs/templates/login.ini" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/configs/templates/login.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/Bootstrap.php" afterPath="$PROJECT_DIR$/application/Bootstrap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/Preset.php" afterPath="$PROJECT_DIR$/application/Preset.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/configs/templates/domains.locale.mapping.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SimpleSite.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,55 +39,10 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="IndexController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
+      <file leaf-file-name="domains.locale.mapping.ini" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/configs/templates/domains.locale.mapping.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="10" selection-start="1852" selection-end="1852" vertical-scroll-proportion="-7.5555553">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Login.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/core/Controller/Action/Helper/Login.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="491" column="32" selection-start="14865" selection-end="14865" vertical-scroll-proportion="1.2282352">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Redirector.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/library/Zend/Controller/Action/Helper/Redirector.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="270" column="20" selection-start="7473" selection-end="7473" vertical-scroll-proportion="-3.56">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Preset.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/Preset.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="241" column="12" selection-start="6429" selection-end="6429" vertical-scroll-proportion="-8.907408">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Admin.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Desktop/P/vt2/application/abstract/Controller/Admin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="79" selection-start="97" selection-end="97" vertical-scroll-proportion="93.84">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.ini" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="0" selection-start="959" selection-end="959" vertical-scroll-proportion="0.0">
+            <state line="10" column="67" selection-start="174" selection-end="174" vertical-scroll-proportion="0.1584343">
               <folding />
             </state>
           </provider>
@@ -104,10 +62,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/Bootstrap.php" />
-        <option value="$PROJECT_DIR$/application/configs/application.ini" />
-        <option value="$PROJECT_DIR$/application/configs/auth.ini" />
-        <option value="$PROJECT_DIR$/application/layouts/scripts/default.phtml" />
         <option value="$PROJECT_DIR$/application/configs/login.ini" />
         <option value="$PROJECT_DIR$/library/ZFDebug/Controller/Plugin/Debug/Plugin/Auth.php" />
         <option value="$PROJECT_DIR$/application/plugins/ZFDebug.php" />
@@ -116,10 +70,14 @@
         <option value="$PROJECT_DIR$/logs/php.log" />
         <option value="$PROJECT_DIR$/logs/app.log" />
         <option value="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" />
-        <option value="$PROJECT_DIR$/application/Preset.php" />
         <option value="$PROJECT_DIR$/library/Zend/Controller/Action/Helper/Redirector.php" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/login-widget.phtml" />
         <option value="$PROJECT_DIR$/application/core/Controller/Action/Helper/Login.php" />
+        <option value="$PROJECT_DIR$/application/configs/application.ini" />
+        <option value="$PROJECT_DIR$/application/Bootstrap.php" />
+        <option value="$PROJECT_DIR$/application/Preset.php" />
+        <option value="$USER_HOME$/P/mage/skin/frontend/default/default/css/styles.css" />
+        <option value="$USER_HOME$/Desktop/KPM/styles.css" />
       </list>
     </option>
   </component>
@@ -149,60 +107,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
-      <pane id="Scope">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SimpleSite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SimpleSite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Problems" />
-        <subPane subId="All">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SimpleSite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SimpleSite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SimpleSite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SimpleSite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="cache">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -277,6 +181,60 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Favorites" />
+      <pane id="Scope">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SimpleSite">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SimpleSite">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Problems" />
+        <subPane subId="All">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SimpleSite">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SimpleSite">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SimpleSite">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SimpleSite">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="cache">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -284,7 +242,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="web-ide.project.structure" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/P/vt2/application/abstract/Controller" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/KPM" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
@@ -330,9 +288,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/application/configs/templates" />
+      <recent name="$PROJECT_DIR$/application/configs/" />
       <recent name="$PROJECT_DIR$/application/configs" />
       <recent name="$PROJECT_DIR$/application/plugins" />
-      <recent name="$PROJECT_DIR$/application/configs/" />
       <recent name="$PROJECT_DIR$/htdocs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -431,26 +389,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1678" y="150" width="1444" height="878" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32891247" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36206895" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922202" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32845744" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CSS-X-Fire" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27298445" sideWeight="0.15517241" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="eSnippet Pro" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27298445" sideWeight="0.49734747" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27234042" sideWeight="0.67021275" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32319662" sideWeight="0.4862486" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27195767" sideWeight="0.32047874" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="eSnippet Pro" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32222223" sideWeight="0.4862486" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291714" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299712" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36206895" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922202" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DatabaseBrowser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294335" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.7917772" order="2" side_tool="false" content_ui="combo" />
@@ -470,7 +428,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="true" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor main pre set class and including this one in application. Add Plugin cache handling, this was recommended in Zend reference online." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix and addon ZFDebug libray classes" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -488,10 +446,10 @@
     <MESSAGE value="delete Zend lib, this one must be externaly" />
     <MESSAGE value="workspace file" />
     <MESSAGE value="Was written new bootstrap init method a database connections dbmanager, also added config file for this init block." />
-    <MESSAGE value="Fix and addon ZFDebug libray classes" />
     <MESSAGE value="Write Login Action helper, this one will render login form, validate user entered data, authenticate user and forward to allowed resource.&#10;Is based on DB authenticate adapter.&#10;Add confi file login.ini. &#10;Add login form.&#10;Add view tremplate &quot;login-widget&quot;." />
     <MESSAGE value="Pass options and small refatoring" />
     <MESSAGE value="Refactor main pre set class and including this one in application. Add Plugin cache handling, this was recommended in Zend reference online." />
+    <MESSAGE value="Fix and addon ZFDebug libray classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -501,104 +459,84 @@
     <find-history />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/logs/errors.srv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="0" selection-end="1056" vertical-scroll-proportion="0.092391305">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/php.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/layouts/scripts/default.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="89" selection-start="260" selection-end="260" vertical-scroll-proportion="0.16391185">
-          <folding>
-            <element signature="tag#body#0;tag#html#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/forms/Login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="38" selection-start="157" selection-end="157" vertical-scroll-proportion="-1.6157025">
-          <folding />
-        </state>
+        <state line="6" column="38" selection-start="157" selection-end="157" vertical-scroll-proportion="-1.6157025" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/core/Controller/Action.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="533" column="64" selection-start="15652" selection-end="15652" vertical-scroll-proportion="1.2151898">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="959" selection-end="959" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/Bootstrap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="27" selection-start="662" selection-end="662" vertical-scroll-proportion="0.56198347">
-          <folding />
-        </state>
+        <state line="533" column="64" selection-start="15652" selection-end="15652" vertical-scroll-proportion="1.2151898" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cache/pluginLoaderCache.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="69" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.79614323">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/P/vt2/application/abstract/Controller/Admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="79" selection-start="97" selection-end="97" vertical-scroll-proportion="93.84">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/Preset.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="241" column="12" selection-start="6429" selection-end="6429" vertical-scroll-proportion="-8.907408">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/Zend/Controller/Action/Helper/Redirector.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="270" column="20" selection-start="7473" selection-end="7473" vertical-scroll-proportion="-3.56">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="10" selection-start="1852" selection-end="1852" vertical-scroll-proportion="-7.5555553">
-          <folding />
-        </state>
+        <state line="34" column="69" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.79614323" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/login-widget.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="9" selection-start="43" selection-end="43" vertical-scroll-proportion="0.07024793">
-          <folding>
-            <element signature="tag#a#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="3" column="9" selection-start="43" selection-end="43" vertical-scroll-proportion="0.07024793" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/Zend/Controller/Action/Helper/Redirector.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="270" column="20" selection-start="7473" selection-end="7473" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/P/vt2/application/abstract/Controller/Admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="79" selection-start="97" selection-end="97" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="15" selection-start="571" selection-end="582" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/Bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="39" selection-start="323" selection-end="323" vertical-scroll-proportion="-10.88" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/Zend/Cache/Core.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="6" selection-start="949" selection-end="964" vertical-scroll-proportion="0.08110687" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/KPM/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="957" column="128" selection-start="74188" selection-end="74188" vertical-scroll-proportion="0.3327032" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/P/mage/skin/frontend/default/default/css/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="297" column="43" selection-start="14348" selection-end="14348" vertical-scroll-proportion="2.8922496" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/login.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="550" selection-end="550" vertical-scroll-proportion="0.34855545" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/Preset.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="160" column="30" selection-start="4533" selection-end="4533" vertical-scroll-proportion="0.3000968" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/core/Controller/Action/Helper/Login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="491" column="32" selection-start="14865" selection-end="14865" vertical-scroll-proportion="1.2282352">
+        <state line="479" column="33" selection-start="14353" selection-end="14353" vertical-scroll-proportion="1.3625954" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="10" selection-start="1852" selection-end="1852" vertical-scroll-proportion="0.016221374" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/templates/domains.locale.mapping.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="67" selection-start="174" selection-end="174" vertical-scroll-proportion="0.1584343">
           <folding />
         </state>
       </provider>

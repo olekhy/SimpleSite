@@ -4,6 +4,7 @@
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    
     /**
      * @return void
      */
@@ -53,8 +54,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initRouter()
     {
         if(!$this->hasPluginResource('Router')) return;
-        $router = $this->getPluginResource('Router')->init();
         /** @var $router Zend_Controller_Router_Rewrite */
+        $router = $this->getPluginResource('Router')->init();
         $request = new Zend_Controller_Request_Http();
         $router->route($request);
         $localeString = $request->getParam('lang').'_'.
@@ -66,19 +67,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 $router->removeRoute($router->getCurrentRouteName());
             }
         }
-        
+
         if($this->hasPluginResource('Locale')){
             $this->bootstrap('Locale');
         }
         if($this->hasResource('Locale')){
-            $locale = $this->getResource('Locale');
             /** @var $locale Zend_Locale */
+            $locale = $this->getResource('Locale');
             if(!$localeString){
                 $localeString = array_shift(array_flip($locale->getDefault()));
             } else $router->setParam('localeInUrl', true);
             $locale->setLocale($localeString); // also in Registry even
         }
-
         return $router;
     }
     /**
@@ -90,7 +90,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $options = $this->getOption('session');
         if(empty($options)) return;
-        if(array_key_exists('cookie_bind', $options)){
+        if(array_key_exists('cookie_bind', $options)) {
             $m = array();
             $search = "/^(?P<subdomain>([^\.]+))\.(?P<domain>([^\.]+))\.(?P<tld>([^\.]{2,6}))/i";
             if(preg_match($search,$_SERVER['SERVER_NAME'], $m)) {
@@ -103,14 +103,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             unset($options['cookie_bind']);
         }
 
-        if($this->hasPluginResource('Session')){
+        if($this->hasPluginResource('Session')) {
             $sessionResources = $this->getPluginResource('Session');
             $resourceOptions = $sessionResources->getOptions();
             $sessionResources->setOptions($options + $resourceOptions);
         } else {
             Zend_Session::setOptions($options);
         }
-        if(!Zend_Session::isStarted() && $options['remember_me_seconds']){
+        if(!Zend_Session::isStarted() && $options['remember_me_seconds']) {
             Zend_Session::rememberMe($options['remember_me_seconds']);
         }
     }
@@ -124,9 +124,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         if($this->hasPluginResource('Log')){
             return $this->getPluginResource('Log')->init();
         }
-        if(class_exists('Configure')){
-            return Configure::log();    
+        $option = $this->getOption('presetClass');
+        if(array_key_exists('class', $option)) {
+
+            if(class_exists($option['class']) && method_exists($option['class'], 'log')){
+                return call_user_func("{$option['class']}::log");
+            }
         }
+        return new Zend_Log(new Zend_Log_Writer_Null());
     }
     /**
      *
@@ -164,23 +169,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $dbs = new stdClass();
         $dbs->masterdb = null;
         $dbs->slavedb = null;
-        if($options = $this->getOption('dbmanager')){
-            if(array_key_exists('defaultMetadataCache', $options)){
+        if($options = $this->getOption('dbmanager')) {
+            if(array_key_exists('defaultMetadataCache', $options)) {
                 $this->bootstrap('CacheManager');
                 $cacheManager = $this->getResource('CacheManager');
-                if($cacheManager instanceof Zend_Cache_Manager){
-                    if($cacheManager->hasCache($options['defaultMetadataCache'])){
+                if($cacheManager instanceof Zend_Cache_Manager) {
+                    if($cacheManager->hasCache($options['defaultMetadataCache'])) {
                         $cache = $cacheManager->getCache($options['defaultMetadataCache']);
                         Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
                     }
                 }
             }
-            if(!Zend_Registry::isRegistered('masterdb') && array_key_exists('rw', $options)){
+            if(!Zend_Registry::isRegistered('masterdb') && array_key_exists('rw', $options)) {
                 $masterOpt = $options['rw'][array_rand($options['rw'], 1)];
                 $dbs->masterdb = Zend_Db::factory($masterOpt['adapter'], $masterOpt);
                 Zend_Registry::set('masterdb', $dbs->masterdb);
             }
-            if(!Zend_Registry::isRegistered('slavedb') && array_key_exists('r', $options)){
+            if(!Zend_Registry::isRegistered('slavedb') && array_key_exists('r', $options)) {
                 $slaveOpt = $options['r'][array_rand($options['r'], 1)];
                 $dbs->slavedb = Zend_Db::factory($slaveOpt['adapter'], $slaveOpt);
                 Zend_Registry::set('slavedb', $dbs->slavedb);
