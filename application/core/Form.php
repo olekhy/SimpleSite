@@ -69,6 +69,10 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
     protected $_lang;
 
     protected $_teritory;
+    /**
+     * @var 
+     */
+    protected $_log;
 
     /**
      * Add filter magic quotes stripslashes to form element
@@ -111,9 +115,9 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
     /**
      * @return mixed|Zend_Config
      */
-    public function getApplicationConfig ()
+    public function getGlobalConfig()
     {
-        
+        return App_Core_Abstract::getCfg();    
     }
 
 
@@ -122,21 +126,15 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
      */
     public function isDebug()
     {
-        if(DEBUG) {
-            return true;
-        }
-        else return false;
+        return App_Core_Abstract::isDebug();
     }
     /**
      * @return Zend_Log
      */
     public function getLog()
-    {          
-        if(Zend_Registry::isRegistered('Zend_Log'))
-        return Zend_Registry::get('Zend_Log');    
+    {
+        return App_Core_Abstract::getLog($this->_log);   
     }
-
-
 
     /**
      * Add a new element
@@ -284,5 +282,14 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
             }
         }
         return $errors;
+    }
+
+    /**
+     * @param  $log
+     * @return App_Core_Form
+     */
+    public function setLog($log){
+        $this->_log = $log;
+        return $this;
     }
 }

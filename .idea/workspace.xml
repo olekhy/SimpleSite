@@ -4,12 +4,14 @@
     <bookmark url="file://$PROJECT_DIR$/library/Zend/Db/Table.php" line="42" />
   </component>
   <component name="ChangeListManager">
-    <list readonly="true" id="2d9a8e06-7173-42f5-a052-5d979f837452" name="Default" comment="workspace file">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" />
-    </list>
-    <list default="true" id="7ee615c2-b51f-4dcf-89ad-e320f6a3a345" name="po1" comment="Refactor for better clearness">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/login-widget.phtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/forms/Login.php" />
+    <list readonly="true" id="2d9a8e06-7173-42f5-a052-5d979f837452" name="Default" comment="" />
+    <list default="true" id="7ee615c2-b51f-4dcf-89ad-e320f6a3a345" name="po1" comment="Login widget is ready, without acl">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/Form.php" afterPath="$PROJECT_DIR$/application/core/Form.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/Abstract.php" afterPath="$PROJECT_DIR$/application/core/Abstract.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/library/ZFDebugext/Database.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/Controller/Action.php" afterPath="$PROJECT_DIR$/application/core/Controller/Action.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/Interface.php" afterPath="$PROJECT_DIR$/application/core/Interface.php" />
     </list>
     <ignored path="SimpleSite.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,10 +47,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndexController.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="IndexController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="10" selection-start="1852" selection-end="1852" vertical-scroll-proportion="0.024709303">
+            <state line="82" column="0" selection-start="2256" selection-end="2256" vertical-scroll-proportion="-8.84">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Abstract.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/core/Abstract.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="25" selection-start="2142" selection-end="2142" vertical-scroll-proportion="-9.84">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Form.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/core/Form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="117" column="35" selection-start="3415" selection-end="3415" vertical-scroll-proportion="-4.4">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Action.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/core/Controller/Action.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="252" column="26" selection-start="7857" selection-end="7857" vertical-scroll-proportion="0.36552748">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Preset.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/Preset.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="114" column="5" selection-start="3372" selection-end="3372" vertical-scroll-proportion="-6.76">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Interface.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/core/Interface.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="29" selection-start="1776" selection-end="1776" vertical-scroll-proportion="-8.84">
               <folding />
             </state>
           </provider>
@@ -68,10 +115,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/configs/login.ini" />
-        <option value="$PROJECT_DIR$/library/ZFDebug/Controller/Plugin/Debug/Plugin/Auth.php" />
-        <option value="$PROJECT_DIR$/application/plugins/ZFDebug.php" />
-        <option value="$PROJECT_DIR$/library/Zend/Auth/Adapter/DbTable.php" />
         <option value="$PROJECT_DIR$/application/forms/Login.php" />
         <option value="$PROJECT_DIR$/logs/php.log" />
         <option value="$PROJECT_DIR$/logs/app.log" />
@@ -84,6 +127,10 @@
         <option value="$PROJECT_DIR$/application/Preset.php" />
         <option value="$USER_HOME$/P/mage/skin/frontend/default/default/css/styles.css" />
         <option value="$USER_HOME$/Desktop/KPM/styles.css" />
+        <option value="$PROJECT_DIR$/application/core/Abstract.php" />
+        <option value="$PROJECT_DIR$/application/core/Interface.php" />
+        <option value="$PROJECT_DIR$/application/core/Form.php" />
+        <option value="$PROJECT_DIR$/application/core/Controller/Action.php" />
       </list>
     </option>
   </component>
@@ -141,6 +188,34 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleSite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleSite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cache" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleSite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleSite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="application" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -159,7 +234,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="configs" />
+              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -177,11 +252,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="configs" />
+              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -396,7 +471,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922202" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32806692" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
@@ -404,7 +479,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27234042" sideWeight="0.67021275" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27195767" sideWeight="0.6654275" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16084656" sideWeight="0.6654275" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="eSnippet Pro" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32222223" sideWeight="0.4862486" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -434,7 +509,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="true" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor for better clearness" />
+    <option name="LAST_COMMIT_MESSAGE" value="now contains this controller only examples" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -457,6 +532,8 @@
     <MESSAGE value="Refactor main pre set class and including this one in application. Add Plugin cache handling, this was recommended in Zend reference online." />
     <MESSAGE value="Fix and addon ZFDebug libray classes" />
     <MESSAGE value="Refactor for better clearness" />
+    <MESSAGE value="Login widget is ready, without acl" />
+    <MESSAGE value="now contains this controller only examples" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -466,26 +543,6 @@
     <find-history />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/forms/Login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="38" selection-start="157" selection-end="157" vertical-scroll-proportion="-1.6157025" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/core/Controller/Action.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="533" column="64" selection-start="15652" selection-end="15652" vertical-scroll-proportion="1.2151898" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cache/pluginLoaderCache.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="69" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.79614323" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/login-widget.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="9" selection-start="43" selection-end="43" vertical-scroll-proportion="0.07024793" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/library/Zend/Controller/Action/Helper/Redirector.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="270" column="20" selection-start="7473" selection-end="7473" vertical-scroll-proportion="0.0" />
@@ -526,11 +583,6 @@
         <state line="22" column="0" selection-start="550" selection-end="550" vertical-scroll-proportion="0.34855545" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/Preset.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="30" selection-start="4533" selection-end="4533" vertical-scroll-proportion="0.3000968" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/core/Controller/Action/Helper/Login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="479" column="33" selection-start="14353" selection-end="14353" vertical-scroll-proportion="1.3625954" />
@@ -545,7 +597,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="10" selection-start="1852" selection-end="1852" vertical-scroll-proportion="0.024709303">
+        <state line="82" column="0" selection-start="2256" selection-end="2256" vertical-scroll-proportion="-8.84">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/Interface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="29" selection-start="1776" selection-end="1776" vertical-scroll-proportion="-8.84">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/Form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="35" selection-start="3415" selection-end="3415" vertical-scroll-proportion="-4.4">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/Abstract.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="25" selection-start="2142" selection-end="2142" vertical-scroll-proportion="-9.84">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/Preset.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="5" selection-start="3372" selection-end="3372" vertical-scroll-proportion="-6.76">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/Controller/Action.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="252" column="26" selection-start="7857" selection-end="7857" vertical-scroll-proportion="0.36552748">
           <folding />
         </state>
       </provider>

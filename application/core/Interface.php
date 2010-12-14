@@ -51,5 +51,5 @@ interface App_Core_Interface
 {
     public function getLog();
     public function isDebug();
-
+    public function getCfg();
 }

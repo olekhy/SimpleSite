@@ -32,8 +32,10 @@
  * @property App_Model_Table_Persist2Image $persist2Image
  * @property App_Model_Table_Challenge $challenge
  *
+ * @method sesServerName() string|null sesServerName([$val|null]) if arg nul then value will be unset else return value from session by key "ServerName"
+ *
  */
-abstract class App_Abstract_Controller_Action extends Zend_Controller_Action implements App_Abstract_Interface
+abstract class App_Abstract_Controller_Action extends Zend_Controller_Action implements App_Core_Interface
 {
     const ROLE_USER = 'user';
     const ROLE_ADMIN = 'admin';
@@ -82,55 +84,36 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
 
 
     /**
+     *
+     * 
      * @var Zend_Session_Namespace
      */
     protected $_sess;
-    /**
-     * @var Zend_Log
-     */
-    protected $_log;
-    /**
-     * @var Zend_Config
-     */
-    protected $_cfg;
-    /**
-     * @var Zend_Cache_Manager
-     */
-    protected $_cacheManager;
-    /**
-     * @var Object
-     */
-    protected $_authUser;
-    /**
-     * @var string
-     */
-    protected $_lang;
-    /**
-     * @var string
-     */
-    protected $_land;
-    /**
-     * @var string
-     */
-    protected $_localeString;
 
     /**
+     *
+     * 
      * @var Zend_Acl
      */
     protected $_acl;
 
     /**
+     *
+     * 
      * @var array models or table classes
      */
     protected $_models = array();
 
     /**
+     *
+     *
      * @var array forms classes
      */
     protected $_forms = array();
 
     /**
-     *
+     * Get model object if they class exists
+     * 
      * @param  $name
      * @return array|mixed
      */
@@ -155,11 +138,8 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
     {
         parent::init();
 
-        $this->_cfg = $this->getApplicationConfig();
         $this->_sess = $this->getSession();
         $this->view->msg = $this->_helper->flashMessenger->getCurrentMessages();
-        $this->view->lastAction = $this->sesLastAction();
-        $this->view->lang = $this->getLanguage();
         $this->_acl = new Zend_Acl;
         $this->_acl->addRole(new Zend_Acl_Role(self::ROLE_USER));
         $this->_acl->addRole(new Zend_Acl_Role(self::ROLE_ADMIN), self::ROLE_USER);
@@ -266,11 +246,11 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
     public function serverUrl(array $actionsInCurrentControllerToHttps = array())
     {
         $serverurl = 'http://' . trim($this->getRequest()->SERVER_NAME, '/');
-        if(!$this->sesServerName())
-        {
+        if(!$this->sesServerName()) {
             $this->sesServerName($serverurl);
         }
-        if( isset($this->_cfg->handle->locale) && APPLICATION_ENV == APPLICATION_MODE_PRODUCTION)
+        $cfg = self::getGlogalConfig();
+        if(isset($cfg->handle->locale) && APPLICATION_ENV == APPLICATION_MODE_PRODUCTION)
         {
             if(in_array($this->getRequest()->getActionName(), $actionsInCurrentControllerToHttps))
             {
@@ -292,261 +272,117 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
     }
 
     /**
-     * @return mixed
-     */
-    public function getAuthUserRole()
-    {
-        if(($storage = Zend_Auth::getInstance()->getStorage()->read()) instanceof stdClass )
-        {
-            if(isset($storage->{self::AUTH_FIELD_ROLE}) &&
-               in_array($storage->{self::AUTH_FIELD_ROLE},
-                        array(self::ROLE_ADMIN,
-                              self::ROLE_SUPER,
-                              self::ROLE_USER))
-            )
-            {
-                return $storage->{self::AUTH_FIELD_ROLE};
-            }
-        }
-        else
-        {
-            $storage = new stdClass;
-        }
-        $storage->{self::AUTH_FIELD_ROLE} = self::ROLE_USER;
-        Zend_Auth::getInstance()->getStorage()->write($storage);
-        return $storage->{self::AUTH_FIELD_ROLE};
-    }
-
-    /**
-     * Return user object if user was autenticated or null
-     * @return mixed null|stdClass
-     */
-    public function getAuthUser()
-    {
-        if($this->_authUser !== null)
-        {
-            return $this->_authUser;
-        }
-        $this->_authUser = Zend_Auth::getInstance()->getStorage()->read();
-        return $this->_authUser;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAuthUserIdentity()
-    {
-        if(!$this->_sess->userId)
-        {
-            return null;
-        }
-        return $this->_sess->userId;
-    }
-
-    /**
-     * Store an authenticated user in property as an object
-     * @param stdClass $userObject
-     */
-    public function setAuthUser($userObject, $identField)
-    {
-        $this->_authUser = $userObject;
-        $this->_sess->userId = $userObject->{$identField};
-        return $this;
-    }
-
-    public function delAuthUser()
-    {
-        $this->_authUser = null;
-        $this->_sess->userId = null;
-        Zend_Auth::getInstance()->getStorage()->clear();
-        return $this;
-    }
-
-    /**
      *
      * @param string $m called not exists method
      * @param string $a method args
      */
     public function __call($m,$a)
     {
-        (($this->isDebug())?$this->getLog()->log('Call magicaly: method:'.$m. '() in '. __METHOD__.':'.__LINE__, Zend_Log::DEBUG):'');
+        ((self::isDebug())?self::getLog()->log('Call magicaly: method:'.$m. '() in '. __METHOD__.':'.__LINE__, Zend_Log::DEBUG):'');
 
-        if(preg_match('/^(ses)(?P<name>(.+))/i', $m, $matches))
-        {
+        if(preg_match('/^(ses)(?P<name>(.+))/i', $m, $matches)) {
             $key = $matches['name'];
-            $cls = get_class($this);
-            $const = "$cls::SESKEY_".strtoupper((string)$key);
-            if(defined($const))
-            {
-                $key = @constant($const);
-            }
-            if(count($a))
-            {
+            if(count($a)) {
                 $this->_sess->$key = $a[0];
                 return $this;
-            }
-            else
-            {
+            } else {
                 return (isset($this->_sess->$key))?$this->_sess->$key:null;
             }
-        }
-        else parent::__call($m, $a);
+        } else parent::__call($m, $a);
     }
 
     /**
+     *
+     * 
+     * @static
      * @return Zend_Log
      */
-    public function getLog()
+    public static function getLog()
     {
-        if($this->_log === null)
-        {
-            if( ! ($this->_log = $this->getInvokeArg('bootstrap')->getResource('Log')) instanceof Zend_Log)
-            {
-                if( ! ($this->_log = App_Abstract_Abstract::getLog() ) instanceof Zend_Log )
-                {
-                    throw new RuntimeException('Logger is not implemented.');
-                }
-            }
+        static $l;
+        if($l == null){
+            $l = App_Core_Abstract::getLog(self::getResource('Log'));
         }
-        return $this->_log;
+        return $l;
     }
 
+    /**
+     *
+     * 
+     * @static
+     * @param  $name
+     * @return 
+     */
+    public static function getResource($name)
+    {
+        $fc = Zend_Controller_Front::getInstance();
+        $bs = $fc->getParam('bootstrap');
+        return $bs->getResource($name);
+    }
+    
     /**
      * Is debugging on then logging leves "debug" and "info" are working normaly
      * else calls debug or info methods are pass
      *
      *  @return boolean
      */
-    public function isDebug()
+    public static function isDebug()
     {
-        return (bool) defined('DEBUG') and DEBUG or false;
+        return App_Core_Abstract::isDebug();
     }
 
     /**
-     * @return Zend_Session_Namespace
-     */
-    public function getSession()
-    {
-        if($this->_sess === null)
-        {
-            if( ! ($this->_sess = $this->getInvokeArg('bootstrap')->getResource('Session')) instanceof Zend_Session_Namespace)
-            {
-                throw new RuntimeException('Session can not be handled, Session object not available.');
-            }
-        }
-        return $this->_sess;
-    }
-
-    /**
+     *
+     * 
      * @return Zend_Cache_Manager
      */
     public function getCacheManager()
     {
-        if($this->_cacheManager === null)
-        {
-            if( ! ($this->_cacheManager = $this->getInvokeArg('bootstrap')->getResource('Cache')) instanceof Zend_Cache_Manager)
-            {
-                throw new RuntimeException('Cache not currently implemented');
-            }
-        }
-        return $this->_cacheManager;
+        return self::getResource('CacheManager');    
     }
 
     /**
+     *  Get current website language as string
+     * 
      * @return string
      */
     public function getLanguage()
     {
-        if(!$this->_lang)
-        {
-            $this->_lang = $this->getInvokeArg('bootstrap')->getResource('Locale')->getLanguage();
-        }
-        return $this->_lang;
+        return self::getResource('Locale')->getLanguage();
     }
 
-    /**
-     * @return string
-     */
-    public function getLand()
-    {
-        if(!$this->_land)
-        {
-            $this->_land = $this->getInvokeArg('bootstrap')->getResource('Locale')->getRegion();
-        }
-        return $this->_land;
-    }
 
     /**
-     * @return string
-     */
-    public function getLocaleAsString()
-    {
-        if(!$this->_localeString)
-        {
-            $this->_localeString = $this->getInvokeArg('bootstrap')->getResource('Locale')->__toString();
-        }
-        return $this->_localeString;
-    }
-
-    /**
+     *
+     * 
      * @param string $string
      * @return string translated in language for current locale
      */
     public function _($string)
     {
-        return $this->getInvokeArg('bootstrap')->getResource('Translator')->translate($string);
+        return self::getResource('Translator')->translate($string);
     }
 
     /**
-     * Applications wide configs
+     * Applications wide config
+     * 
      * @throws RuntimeException
      * @return mixed|Zend_Config
      */
-    public function getApplicationConfig ()
+    public static function getGlogalConfig()
     {
-        if($this->_cfg === null)
-        {
-            if(! ($this->_cfg = $this->getInvokeArg('bootstrap')->getApplicationConfig()) instanceof Zend_Config)
-            {
-                if(!defined(APPLICATION_REGISTRY_CONFIG) ||
-                   !Zend_Registry::isRegistered(APPLICATION_REGISTRY_CONFIG) ||
-                   !($this->_cfg = Zend_Registry::get(APPLICATION_REGISTRY_CONFIG))
-                )
-                {
-                    if( ! ($this->_cfg = App_Abstract_Abstract::getConfig()) instanceof Zend_Config)
-                    {
-                        throw new RuntimeException('Can not retrive Configuration object');
-                    }
-                }
-            }
-        }
-        return $this->_cfg;
+        return App_Core_Abstract::getCfg();
     }
 
     /**
+     *
+     * 
      * @return void
      */
     public function preDispatch()
     {
-        if(in_array('logout', $this->_getAllParams()))
-        {
-            $params = $this->getRequest()->getParams();
-            Zend_Session::stop();
-            Zend_Session::destroy();
-            $this->_helper->redirector->gotoSimpleAndExit('index', 'index', $params['module']);
-
-        }
-        
         $this->getResponse()->setRawHeader('P3P: CP="NOI ADM DEV PSAi COM NAV OUR OTRo STP IND DEM"');
         $this->getResponse()->setRawHeader('Cache-Control: no-cache, must-revalidate');
         $this->getResponse()->setRawHeader('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
-        /*
-        $this->view->assign('url_cmp' = array(
-            'action'=>$this->getRequest()->getActionName())
-            'action'=>$this->getRequest()->getActionName())
-            'action'=>$this->getRequest()->getActionName())
-        );
-         *
-         */
     }
 }

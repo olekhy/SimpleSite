@@ -54,134 +54,39 @@ abstract class App_Core_Abstract implements App_Core_Interface
 {
     /**
      *
-     * @var Zend_Config
-     */
-    protected static $_cfg;
-
-    /**
-     *
-     * @var Zend_Log
-     */
-    protected static $_log;
-
-    /**
-     * @var Zend_Cache_Manager
-     */
-    protected static $_cacheManager;
-
-    /**
-     * @static
-     * @throws RuntimeException|UnexpectedValueException
-     * @return Zend_Log
-     */
-    public function getLog()
-    {
-        if(! self::$_log instanceof Zend_Log)
-        {
-            if(!defined('APPLICATION_REGISTRY_LOG'))
-            {
-                throw new RuntimeException('Constant APPLICATION_REGISTRY_LOG must be defined with value "Zend_Log"');
-            }
-            try
-            {
-                if( ! (self::$_log = Zend_Registry::get(APPLICATION_REGISTRY_LOG)) instanceof Zend_log)
-                {
-                    throw new UnexpectedValueException('Zend_Log was not registered in Zend_Registry.');
-                }
-            }
-            catch(Exception $e)
-            {
-                error_log($e->getMessage());
-                echo $e->getMessage();
-            }
-        }
-        return self::$_log;
-    }
-
-    /**
-     * Is debugging is on then logging leves "debug" and "info" are working normaly
-     * else calls debug or info methods are pass
-     *
-     * @static
-     * @return boolean
-     */
-    public function isDebug()
-    {
-        if(DEBUG)
-        {
-            return true;
-        }
-        else return false;
-    }
-
-    /**
-     * @static
-     * @throws RuntimeException|UnexpectedValueException
+     * 
      * @return Zend_Config
      */
-    public function getConfig()
+    public static function getCfg()
     {
-        if(self::$_cfg === null)
-        {
-            if(!defined('APPLICATION_REGISTRY_CONFIG'))
-            {
-                throw new RuntimeException('Constant APPLICATION_REGISTRY_CONFIG must be defined with value "Zend_Config"');
-            }
-
+        static $cfg;
+        if($cfg == null){
+            $cfg = Preset::thruConfig();
         }
-        try
-        {
-            if( ! (self::$_cfg = Zend_Registry::get(APPLICATION_REGISTRY_CONFIG)))
-            {
-                throw new UnexpectedValueException('Config object was not registered in Zend_Registry or is empty');
-            }
-        }
-        catch(Exception $e)
-        {
-            error_log($e->getMessage());
-            echo $e->getMessage();
-        }
-        return self::$_cfg;
+        return $cfg;
     }
+
     /**
      *
-     * @static
-     * @throws RuntimeException|UnexpectedValueException
-     * @return Zend_Cache_Manager
+     * 
+     * @return bool
      */
-    public function getCacheManager()
-    {
-        if(! self::$_cacheManager instanceof Zend_Log)
-        {
-            if(!defined('APPLICATION_REGISTRY_CACHE_MANAGER'))
-            {
-                throw new RuntimeException('Constant APPLICATION_REGISTRY_CACHE_MANAGER must be defined with value "Zend_Cache_Manager"');
-            }
-            try
-            {
-                if( ! (self::$_cacheManager = Zend_Registry::get(APPLICATION_REGISTRY_CACHE_MANAGER)) instanceof Zend_Cache_Manager)
-                {
-                    throw new UnexpectedValueException('Zend_Cache_Manager was not registered in Zend_Registry.');
-                }
-            }
-            catch(Exception $e)
-            {
-                error_log($e->getMessage());
-                echo $e->getMessage();
-            }
-        }
-        return self::$_cacheManager;
+    public static function isDebug(){
+        return Preset::isDebug();
     }
 
     /**
-     * Wrapping of get Config
-     * @see self::getConfig()
-     * @static
-     * @return Zend_Config
+     *
+     *
+     * @return bool
      */
-    public function getApplicationConfig()
-    {
-        return self::getConfig();
+    public static function isCacheOn(){
+        return Preset::isCachingOn();
     }
 
+    public static function getLog($customLog = null){
+        return Preset::log($customLog);
+    }
+    /** TODO: resources injector must here */
+    
 }
