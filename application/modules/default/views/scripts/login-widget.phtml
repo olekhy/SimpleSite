@@ -1,0 +1,38 @@
+<?php
+/**
+ * @var $this Zend_View
+ * @var $translate Zend_View_Helper_Translate
+ */
+$this->placeholder($this->placeholdername)->captureStart();
+
+    if(!$this->userid && isset($this->form)):
+
+        echo $this->form;
+
+    else:
+
+    ?>
+    <?php
+        if($this->username){
+            echo $this->translate('login.widget.you.are.loggedin.as');
+            echo " <strong>".$this->escape($this->username)."</strong>";
+        }
+    ?>
+    <?php
+        if($this->userrole) {
+            echo ", ";
+            echo $this->translate('login.widget.your.role.is');
+            echo " <strong>".$this->escape($this->userrole)."</strong> ";
+        }
+    ?>
+    <a
+        title="<?php echo $this->translate('Logout');?>"
+        href="<?php echo $this->url(array('action'=>'logout'));?>"
+    ><?php echo $this->translate('Logout');?>
+    </a>
+    <?php
+
+    endif;
+
+$this->placeholder($this->placeholdername)->captureEnd();
+?>
