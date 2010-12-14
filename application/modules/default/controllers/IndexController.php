@@ -6,12 +6,16 @@ class IndexController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+
+        $this->_helper->login();
     }
 
     public function indexAction()
     {
         print "<pre/>";
-        var_dump($this->_getAllParams());
+        //var_dump($_SESSION);
+        //var_dump($this->getRequest()->getParams());
+        //var_dump($this->_getAllParams());  die;
         
         $log = $this->_invokeArgs['bootstrap']->getResource('Log');
         $log->debug('hallo');
@@ -55,17 +59,17 @@ class IndexController extends Zend_Controller_Action
         }
         var_dump($cached2);
         //Zend_Session::start();
-        $sess = new Zend_Session_Namespace();
-        if(!isset($sess->hallo)){
-            $sess->hallo='session test';
-        }
-        var_export($sess->hallo);
+        //$sess = new Zend_Session_Namespace();
+        //if(!isset($sess->hallo)){
+        //    $sess->hallo='session test';
+        //}
+        //var_export($sess->hallo);
         /** @var $translate Zend_Translate **/
-        $translate = $this->_invokeArgs['bootstrap']->getResource('Translate');
+        //$translate = $this->_invokeArgs['bootstrap']->getResource('Translate');
         //var_dump($translate->getCache());
         //var_dump($translate->getAdapter()->getLocale());
         //var_dump(get_class_methods($translate->getAdapter()));
-        $this->view->hallo = "HALLO";
+        //$this->view->hallo = "HALLO";
     }
 
     public function localeAction()
