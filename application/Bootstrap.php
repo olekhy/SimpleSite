@@ -121,16 +121,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initLog()
     {   
-        if($this->hasPluginResource('Log')){
+        if($this->hasPluginResource('Log'))
+        {
             return $this->getPluginResource('Log')->init();
         }
         $option = $this->getOption('presetClass');
-        if(array_key_exists('class', $option)) {
-
-            if(class_exists($option['class']) && method_exists($option['class'], 'log')){
+        if($option && array_key_exists('class', $option)) 
+        {
+            if(class_exists($option['class']) && method_exists($option['class'], 'log'))
+            {
                 return call_user_func("{$option['class']}::log");
             }
         }
+        
         return new Zend_Log(new Zend_Log_Writer_Null());
     }
     /**
@@ -139,8 +142,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * @return Zend_Translate
      */
     protected function _initTranslate()
-    {
-        if($this->hasPluginResource('translate')){
+    {   
+        if($this->hasPluginResource('translate'))
+        {   
             $this->bootstrap('CacheManager');
             if($this->hasOption('domain')){          
                 $this->bootstrap('FrontController');
@@ -148,7 +152,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 if(!$router->getParam('localeInUrl')){ 
                     $this->bootstrap('Locale');
                     foreach($this->getOption('domain') as $localeStr => $domain){
-                        if(array_shift($domain) == $_SERVER['SERVER_NAME'] &&
+                        if(array_shift($domain['http']) == $_SERVER['SERVER_NAME'] &&
                            Zend_Locale::isLocale($localeStr)){
                             $this->getResource('Locale')->setLocale($localeStr);
                             break;

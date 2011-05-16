@@ -78,15 +78,24 @@ class Preset
         self::$_cacheDir = $cacheDir;
 
         try {
-            define('DEBUG', (file_exists(self::$_path.DIRECTORY_SEPARATOR.self::$_configsDirectory.DIRECTORY_SEPARATOR.'debug.on')));
+            define('DEBUG', (file_exists(self::$_path.
+                                         DIRECTORY_SEPARATOR.
+                                         self::$_configsDirectory.
+                                         DIRECTORY_SEPARATOR.
+                                         'debug.on')));
 
             if(!is_writable(dirname(self::$_logDir))) {
                 throw new RuntimeException('Logs directory must be writeable, '.LOG_DIR);
             }
             ini_set('log_error', 1);
-            ini_set('error_log', self::$_logDir.DIRECTORY_SEPARATOR.self::$_logFilePhpErrors);
+            ini_set('error_log', self::$_logDir.
+                                 DIRECTORY_SEPARATOR.
+                                 self::$_logFilePhpErrors);
 
-            define('CACHING', (file_exists(self::$_path.DIRECTORY_SEPARATOR.self::$_configsDirectory.DIRECTORY_SEPARATOR.'cache.on')));
+            define('CACHING', (file_exists(self::$_path.
+                                           DIRECTORY_SEPARATOR.
+                                           self::$_configsDirectory.
+                                           DIRECTORY_SEPARATOR.'cache.on')));
 
             if(!is_dir(self::$_cacheDir) || !is_writable(self::$_cacheDir)) {
                 throw new RuntimeException('Please check cache directory exists and is writable, '.self::$_cacheDir . ','.__METHOD__.':'.__LINE__);
@@ -96,6 +105,7 @@ class Preset
                 throw new RuntimeException('Can not initiate Config object');
             }
             self::thruPluginLoader();
+            Zend_Registry::set('APPCFG', $config);
             return $config;
         } catch (Exception $e) {
             $msg = "ENV [".self::$_env."] ".$e->getMessage();
@@ -151,7 +161,9 @@ class Preset
      */
     public static function thruConfig()
     {
-        if(self::isCachingOn() && self::getCacheManager()->hasCacheTemplate(self::CACHE_TPL_CONFIG)) {
+        if(self::isCachingOn() && 
+           self::getCacheManager()->hasCacheTemplate(self::CACHE_TPL_CONFIG)) 
+        {
             /** $cache Zend_Cache_Core */
             $cache = self::getCacheManager()->getCache(self::CACHE_TPL_CONFIG);
             if (isset($_REQUEST['cc'])) {
@@ -176,9 +188,14 @@ class Preset
     {
         $backType = 'file';
 
-        if(file_exists(self::$_path.DIRECTORY_SEPARATOR.self::$_configsDirectory.DIRECTORY_SEPARATOR.'apc.on') &&
-           extension_loaded('apc')) {
-            $backType = 'apc';
+        if(file_exists(self::$_path.
+                       DIRECTORY_SEPARATOR.
+                       self::$_configsDirectory.
+                       DIRECTORY_SEPARATOR.
+                       'apc.on') &&
+           extension_loaded('apc')) 
+        {
+           $backType = 'apc';
         }
 
         $front = array(
@@ -235,7 +252,8 @@ class Preset
         $config = new Zend_Config(array(), true);
         $masterFiles = self::getConfigMasterFiles();
         if(empty($masterFiles)) {
-            throw new RuntimeException('Array within configurations master files contains no informations.');
+            throw new RuntimeException(
+                'Array within configurations master files contains no informations.');
         }
         foreach($masterFiles as $file) {
 
@@ -251,7 +269,8 @@ class Preset
         }
         $config->setReadOnly();
         if($config->count() < 1) {
-            throw new RuntimeException('Empty Config object is provided, in '.__METHOD__.':'.__LINE__);
+            throw new RuntimeException('Empty Config object is provided, 
+            in '.__METHOD__.':'.__LINE__);
         }
         return $config;
     }

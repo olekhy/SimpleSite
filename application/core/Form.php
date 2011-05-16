@@ -19,8 +19,8 @@
  * @package    Form
  * @subpackage App_Abstract
  * @package    Zend_Form
- * @author     Original Author <olekhy@gmail.com>
- * @author     Another Author <saschaprolic@gmail.com>
+ * @author     <olekhy@gmail.com>
+ * @author     <saschaprolic@gmail.com>
  * @copyright  2009-2005 The Webfact GmbH, Copyright (c) 2010 Webfact GmbH (http://www.webfact.de)
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
  * @version    SVN: $Id:$
@@ -54,25 +54,13 @@
  * @deprecated No
  */
 
-abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
+abstract class App_Core_Form extends Zend_Form
 {
     /**
      * We known magic quotes enabled problem
      * @var boolean
      */
     private $_applyFilterMagicGpc = false;
-
-    /**
-     * Current language string must be filled
-     * @var string
-     */
-    protected $_lang;
-
-    protected $_teritory;
-    /**
-     * @var 
-     */
-    protected $_log;
 
     /**
      * Add filter magic quotes stripslashes to form element
@@ -83,22 +71,30 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
     {
         $element->addFilter(new App_Abstract_Filter_Stripslashes($this->_applyFilterMagicGpc));
     }
+    
     /**
      * @return string
      */
     public function getLanguage()
     {
+        static $language;
+        if($language != null)
+        {
+            return $language;
+        }
+
+        /** @var $locale Zend_Locale */
         if(Zend_Registry::isRegistered('Zend_Locale'))
-        return Zend_Registry::get('Zend_Locale')->getLanguage();
+        {
+            $locale = Zend_Registry::get('Zend_Locale');
+        } 
+        else
+        {
+            $locale = new Zend_Locale();
+        }
+        return $language = $locale->getLanguage();
     }
-    /**
-     * @return string
-     */
-    public function getTeritory()
-    {
-        if(Zend_Registry::isRegistered('Zend_Locale'))
-        return Zend_Registry::get('Zend_Locale')->getTeritory();
-    }
+    
     /**
      * Initialize form (used by extending classes)
      *
@@ -110,30 +106,6 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
         if(function_exists('get_magic_quotes_gpc') && 1 == get_magic_quotes_gpc()) {
             $this->_applyFilterMagicGpc = true;
         }
-    }
-
-    /**
-     * @return mixed|Zend_Config
-     */
-    public function getGlobalConfig()
-    {
-        return App_Core_Abstract::getCfg();    
-    }
-
-
-    /**
-     * @return bool true if application run in Debug mode
-     */
-    public function isDebug()
-    {
-        return App_Core_Abstract::isDebug();
-    }
-    /**
-     * @return Zend_Log
-     */
-    public function getLog()
-    {
-        return App_Core_Abstract::getLog($this->_log);   
     }
 
     /**
@@ -282,14 +254,5 @@ abstract class App_Core_Form extends Zend_Form implements App_Core_Interface
             }
         }
         return $errors;
-    }
-
-    /**
-     * @param  $log
-     * @return App_Core_Form
-     */
-    public function setLog($log){
-        $this->_log = $log;
-        return $this;
     }
 }

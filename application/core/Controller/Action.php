@@ -32,10 +32,12 @@
  * @property App_Model_Table_Persist2Image $persist2Image
  * @property App_Model_Table_Challenge $challenge
  *
- * @method sesServerName() string|null sesServerName([$val|null]) if arg nul then value will be unset else return value from session by key "ServerName"
+ * @method string|null sesServerWithProto($value = null) if arg null then value will be unset else return value from session by key "ServerWithProto"
  *
  */
-abstract class App_Abstract_Controller_Action extends Zend_Controller_Action implements App_Core_Interface
+
+abstract class App_Core_Controller_Action extends 
+    Zend_Controller_Action
 {
     const ROLE_USER = 'user';
     const ROLE_ADMIN = 'admin';
@@ -89,6 +91,12 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
      * @var Zend_Session_Namespace
      */
     protected $_sess;
+    
+    /**           
+     * Holds an array of actions for data transport over https protocol
+     * @var array
+     */    
+    protected $_secureActions = array();
 
     /**
      *
@@ -99,37 +107,10 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
 
     /**
      *
-     * 
-     * @var array models or table classes
-     */
-    protected $_models = array();
-
-    /**
-     *
      *
      * @var array forms classes
      */
     protected $_forms = array();
-
-    /**
-     * Get model object if they class exists
-     * 
-     * @param  $name
-     * @return array|mixed
-     */
-    public function __get($name)
-    {
-        $class = 'App_Model_Table_'.ucfirst($name);
-        if(!class_exists($class))
-        {
-            return $this->{$name};
-        }
-        if(isset($this->_models[$name]) && ($this->_models[$name] instanceof $class))
-        {
-            return $this->_models[$name];
-        }
-        return $this->_models[$name] = new $class;
-    }
 
     /**
      * Initialize object
@@ -138,7 +119,8 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
     {
         parent::init();
 
-        $this->_sess = $this->getSession();
+        $this->_sess = $this->getResource('Session');
+        $this->view->BASETAG = $this->getFrontController()->getBaseUrl();
         $this->view->msg = $this->_helper->flashMessenger->getCurrentMessages();
         $this->_acl = new Zend_Acl;
         $this->_acl->addRole(new Zend_Acl_Role(self::ROLE_USER));
@@ -238,6 +220,59 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
         );
 
     }
+    /**
+     * @throws UnexpectedValueException
+     * @return string|void
+     */
+    protected function serverNameWithProtocol()
+    {
+        /** @var $request Zend_Controller_Request_Http */
+        $request = $this->getRequest();
+        $cfg = App::cfg();
+        /** @var $cfg Zend_Config */
+        if (!$this->sesServerWithProto())
+        {
+            $this->sesServerWithProto('http://' . trim($request->getServer('SERVER_NAME'), '/ '));
+        }
+        $server = $this->sesServerWithProto();
+        if ($cfg->usingSSL == 1)
+        {
+            if (in_array($request->getActionName(), $this->_secureActions))
+            {
+                /** @var $locale Zend_Locale */
+                $locale = $this->getResource('Locale');
+                $region = $locale->getRegion();
+                $ssLDomain = $cfg->domain->{$locale}->ssl;
+                if (!$ssLDomain)
+                {
+                    throw new UnexpectedValueException('Config value domain ssl is not present, 
+                        please set this one in config file.');
+                }
+                $server = 'https://' . rtrim($ssLDomain, '/');
+                if (!$request->isSecure())
+                {
+                    $url = $server . $request->getServer('REQUEST_URI');
+                    return $this->_redirect($url);
+                }
+            }
+            elseif ($request->isSecure())
+            {
+                $url = $server . $request->getServer('REQUEST_URI');
+                return $this->_redirect($url);
+            }
+        }
+        return $server;
+    }
+    /**
+     * @param array $actionNames
+     * @return App_Core_Controller_Action
+     */
+    public function setSecureActions(array $actionNames)
+    {
+        $this->_secureActions = $actionNames;
+        return $this;
+    }
+
 
     /**
      * @param array $actionsInCurrentControllerToHttps
@@ -278,7 +313,7 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
      */
     public function __call($m,$a)
     {
-        ((self::isDebug())?self::getLog()->log('Call magicaly: method:'.$m. '() in '. __METHOD__.':'.__LINE__, Zend_Log::DEBUG):'');
+        ((App::isDebug())?App::log()->log('Call magicaly: method:'.$m. '() in '. __METHOD__.':'.__LINE__, Zend_Log::DEBUG):'');
 
         if(preg_match('/^(ses)(?P<name>(.+))/i', $m, $matches)) {
             $key = $matches['name'];
@@ -295,21 +330,6 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
      *
      * 
      * @static
-     * @return Zend_Log
-     */
-    public static function getLog()
-    {
-        static $l;
-        if($l == null){
-            $l = App_Core_Abstract::getLog(self::getResource('Log'));
-        }
-        return $l;
-    }
-
-    /**
-     *
-     * 
-     * @static
      * @param  $name
      * @return 
      */
@@ -320,27 +340,6 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
         return $bs->getResource($name);
     }
     
-    /**
-     * Is debugging on then logging leves "debug" and "info" are working normaly
-     * else calls debug or info methods are pass
-     *
-     *  @return boolean
-     */
-    public static function isDebug()
-    {
-        return App_Core_Abstract::isDebug();
-    }
-
-    /**
-     *
-     * 
-     * @return Zend_Cache_Manager
-     */
-    public function getCacheManager()
-    {
-        return self::getResource('CacheManager');    
-    }
-
     /**
      *  Get current website language as string
      * 
@@ -361,17 +360,6 @@ abstract class App_Abstract_Controller_Action extends Zend_Controller_Action imp
     public function _($string)
     {
         return self::getResource('Translator')->translate($string);
-    }
-
-    /**
-     * Applications wide config
-     * 
-     * @throws RuntimeException
-     * @return mixed|Zend_Config
-     */
-    public static function getGlogalConfig()
-    {
-        return App_Core_Abstract::getCfg();
     }
 
     /**
