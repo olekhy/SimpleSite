@@ -1,0 +1,107 @@
+<?php
+
+class Tools_Profiler
+{
+    private static $_off = false;
+	public static $instances;
+    private $_key;
+	public $sTimeStart;
+	public $sTime;
+	public $timeStartCommon;
+	public $sMemStart;
+	public $sMem;
+
+	private function __construct($key)
+	{
+		$this->_key = $key;
+	}
+
+	public static function off()
+	{
+	    self::$_off = true;
+	} 
+	
+	public static function start($key)
+	{
+	    if(self::$_off) return;
+		self::$instances[$key] = new self($key);
+		self::$instances[$key]->sTimeStart = microtime();
+		self::$timeStartCommon = self::$instances[$key]->sTimeStart;
+		self::$instances[$key]->sMemStart = memory_get_usage(true);
+	}
+
+	public static function finish($key)
+	{
+	    if(self::$_off) return;
+		preg_match('/(.+)\s(.+)/',microtime(), $te);
+        $ts = array();
+		preg_match('/(.+)\s(.+)/', self::$instances[$key]->sTimeStart, $ts);
+        self::$instances[$key]->sTime = ($te[2]-$ts[2]+($te[1]-$ts[1]));
+		self::$instances[$key]->sMem = (memory_get_usage(true) - self::$instances[$key]->sMemStart);
+    }
+    public static function show()
+    {
+        if(self::$_off) return;
+        static $tc = 0;
+    	foreach (self::$instances as $key=>$profiler)
+    	{
+    		if(isset($profiler->sTime))
+    		{
+    			$tc += $profiler->sTime; 
+    			//static $sCommonTime = null;
+    			//if(null === $sCommonTime)
+    			//{
+    			//	$sCommonTime = $profiler->sTime;
+    			//}
+                //else $sCommonTime -= $profiler->sTime;
+
+    			print "<pre class='xdebug-var-dump' dir='ltr'><small>[<b>".$key."</b>] Wraped code uses </small>" ;
+	            print "<font color='#f57900'>$profiler->sTime</font> <small>sec.</small></pre>";
+    		}
+    		else
+    		{
+    			print '<pre>Started profiler '. $key . ' is unfinished.</pre>';
+    		}
+    	}
+    	print "<pre class='xdebug-var-dump' dir='ltr'><small>[<b>The remainder of the time</b>] not messed code </small>" ;
+        print "<font color='#f57900'>$tc</font> <small>sec.</small></pre>";
+    }
+
+    public static function showPlain()
+    {
+        if(self::$_off) return;
+    	$print = PHP_EOL;
+        static $tc = 0;
+        foreach (self::$instances as $key=>$profiler)
+        {
+            if(isset($profiler->sTime))
+            {
+                $tc += $profiler->sTime; 
+//                static $sCommonTime = null;
+//                if(null === $sCommonTime)
+//                {
+//                    $sCommonTime = $profiler->sTime;
+//                }
+//                $sCommonTime -= $profiler->sTime;
+
+                $print .= "[".$key."] Wraped code uses $profiler->sTime sec.".PHP_EOL;
+               	$print .= "[".$key."] MemUsage " . ($profiler->sMem/1024) ." KB.".PHP_EOL;
+            }
+            else
+            {
+                $print .= "Started profiler $key is unfinished.".PHP_EOL;
+            }
+        }
+        $print .= "[The remainder of the time] not messed code $tc sec.".PHP_EOL;
+        $print .= "[MemUsage] " . (memory_get_usage(true)/1024) . " KB.".PHP_EOL;//JLo
+        return $print;
+    }
+
+    public static function write($fileName)
+    {
+        if(self::$_off) return;
+        $fp = fopen($fileName,'a');
+        fwrite($fp,self::showPlain());
+    	fclose($fp);
+    }
+}
